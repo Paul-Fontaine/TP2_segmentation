@@ -33,13 +33,29 @@ def color_segments_find_contours_fill_dataframe(img_RGB, labels):
     df = pd.DataFrame(index=list(range(1, labels.max() + 1)), columns=['Moyenne de R', 'Moyenne de G', 'Moyenne de B'])
     for i in range(1, labels.max() + 1):
         # Color each segment
-        colored_segments[labels == i] = np.random.randint(50, 255, 3)
+        colored_segments[labels == i] = np.random.randint(50, 220, 3)
 
         # Find contours for each segment
         single_segment_mask = (labels == i).astype(np.uint8)
         contour = cv.findContours(single_segment_mask, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)[0]
+        # If the contour is too small area, skip it
+        if cv.contourArea(contour[0]) < 100:
+            continue
+
         # Draw the contours on the image
         cv.drawContours(img_RGB_with_contours, contour  , -1, (0, 255, 0), 2)
+
+        # add the label to the image for each segment
+        # find the center of the segment
+        x = 0
+        y = 0
+        for point in contour[0]:
+            x += point[0][0]
+            y += point[0][1]
+        x = int(x / len(contour[0])) - 15
+        y = int(y / len(contour[0])) + 15
+        cv.putText(img_RGB_with_contours, str(i), (x, y), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 1, cv.LINE_AA)
+        cv.putText(colored_segments, str(i), (x, y), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 1, cv.LINE_AA)
 
         # fill the dataframe with the mean of each channel for each segment
         mean_R = np.mean(img_RGB[labels == i][0])
@@ -51,7 +67,7 @@ def color_segments_find_contours_fill_dataframe(img_RGB, labels):
 
 
 
-def my_watershed(img_path: str, local_peak_kernel_size:int=51) -> (np.ndarray, np.ndarray, pd.DataFrame, int):
+def my_watershed(img_path: str, local_peak_kernel_size:int=53) -> (np.ndarray, np.ndarray, pd.DataFrame, int):
     """
     :param img_path:
     :param local_peak_kernel_size: adjust the number of local peaks / segments
