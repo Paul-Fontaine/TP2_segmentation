@@ -23,6 +23,9 @@ J'ai conservé la méthode watershed
    5. **ajout de l'étiquette**
    6. **remplisssage du dataframe avec les moyennes pour chaque canal**
 
+## exemple de résultat
+![](.rapport_images/exemple_res.png)
+
 ## analyse de l'algorithme
 Les performances sont relativement bonnes, j'évalue à ~10% le nomnbre de cailloux mal segmentés.  
 La performance dépend éssentiellement de la détection des marqueurs. J'ai fine tuné mon algorithme sur la taille du noyau pour la détection des maxima locaux.
