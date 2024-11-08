@@ -32,8 +32,6 @@ def color_segments_find_contours_fill_dataframe(img_RGB, labels):
     df = pd.DataFrame(columns=['Moyenne de R', 'Moyenne de G', 'Moyenne de B'])
     j = 0
     for i in range(1, labels.max() + 1):
-        # Color each segment
-        colored_segments[labels == i] = np.random.randint(50, 220, 3)
 
         # Find contours for each segment
         single_segment_mask = (labels == i).astype(np.uint8)
@@ -45,6 +43,9 @@ def color_segments_find_contours_fill_dataframe(img_RGB, labels):
 
         # Draw the contours on the image
         cv.drawContours(img_RGB_with_contours, contour  , -1, (0, 255, 0), 2)
+
+        # Color each segment
+        colored_segments[labels == i] = np.random.randint(50, 220, 3)
 
         # add the label to the image for each segment
         # find the center of the segment
