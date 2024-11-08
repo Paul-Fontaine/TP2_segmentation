@@ -18,8 +18,6 @@ def show_watershed_results(img_path, show=False):
 
     fig.tight_layout()
 
-    df.to_csv("Dataframes/Echantillion1Mod2_301.csv", index=True, header=True)
-
     if show:
         plt.show()
         print(df)
