@@ -23,6 +23,9 @@ J'ai conservé la méthode watershed
    5. **ajout de l'étiquette**
    6. **remplisssage du dataframe avec les moyennes pour chaque canal**
 
+## exemple de résultat
+![](.rapport_images/exemple_res.png)
+
 ## analyse de l'algorithme
 Les performances sont relativement bonnes, j'évalue à ~10% le nomnbre de cailloux mal segmentés.  
 La performance dépend éssentiellement de la détection des marqueurs. J'ai fine tuné mon algorithme sur la taille du noyau pour la détection des maxima locaux.
@@ -35,9 +38,12 @@ Je n'ai pas eesayé la méthode SLIC - K-Means car pour moi il faudrait le nombr
 Les autres méthodes ne m'ont pas données de résultats satisfaisants comparés à watershed lors de leur première implémentation, ce qu'il fait que je n'ai pas cherché à les améliorer.
 
 ## Utilisation du script
-le code source est disponible sur github : [Paul-Fontaine/TP2_segmentation](https://github.com/Paul-Fontaine/TP2_segmentation/)  
-pour lancer le script avec l'affiche des résultats dans une fenêtre Qt, il suffit de lancer la commande suivante:  
+Le code source est disponible sur github : [Paul-Fontaine/TP2_segmentation](https://github.com/Paul-Fontaine/TP2_segmentation/)  
+  
+Pour lancer le script avec l'affichage des résultats dans une fenêtre Qt, il suffit de lancer la commande suivante:  
 ```python segment_rocks_Qt.py Images```  
+Sinon pour un affichage avec matplotlib et la console, lancez la commande suivante:  
+```python main.py Images```
 
 - le fichier `watershed.py`doit être dans le même répertoire que `segment_rocks_Qt.py`
 - si le dossier `Images` n'est pas dans le même répertoire, spécifiez son chemin
