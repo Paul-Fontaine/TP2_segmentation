@@ -1,6 +1,6 @@
 # rapport TP2 segmentation
 8INF804 - Vision artificielle et traitement des images  
-### Paul Fontaine 
+**Paul Fontaine** 
 
 ## Étapes de mon algorithme
 J'ai conservé la méthode watershed
